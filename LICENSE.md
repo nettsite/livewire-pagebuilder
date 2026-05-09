@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) nettsite <william@nettsite.co.za>
+Copyright (c) NettSite <william@nettsite.co.za>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
