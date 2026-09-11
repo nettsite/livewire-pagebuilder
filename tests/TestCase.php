@@ -3,8 +3,8 @@
 namespace NettSite\LivewirePagebuilder\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use NettSite\LivewirePagebuilder\LivewirePagebuilderServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

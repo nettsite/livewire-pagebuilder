@@ -2,24 +2,34 @@
 
 namespace NettSite\LivewirePagebuilder;
 
+use Illuminate\Support\Facades\Blade;
+use NettSite\LivewirePagebuilder\Components\BlockRenderer;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use NettSite\LivewirePagebuilder\Commands\LivewirePagebuilderCommand;
 
 class LivewirePagebuilderServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('livewire-pagebuilder')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_livewire_pagebuilder_table')
-            ->hasCommand(LivewirePagebuilderCommand::class);
+            ->hasViews();
+    }
+
+    public function packageRegistered(): void
+    {
+        $this->app->singleton(BlockRegistry::class);
+    }
+
+    public function packageBooted(): void
+    {
+        $registry = $this->app->make(BlockRegistry::class);
+
+        foreach (config('livewire-pagebuilder.blocks', []) as $class) {
+            $registry->register($class);
+        }
+
+        Blade::component('livewire-pagebuilder::renderer', BlockRenderer::class);
     }
 }
